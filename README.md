@@ -80,7 +80,7 @@ dep 已经是一个不再维护的东西，已经被 go module 取代，但是 m
 2. 克隆该仓库到 $GOPATH/src 下面（就是gopath开发模式）
 3. 按照 https://github.com/golang/dep 中的说明安装 dep
 4. 使用命令 `dep ensure` 初始化 vendor
-5. 使用命令 `go build -ldflags="-H windowsgui"` 进行构建
+5. 使用命令 `go build -ldflags="-H windowsgui"` 进行构建（环境变量 GOARCH=386），注意：需要手动指定32位的编译器（即修改CC和CXX，我的例子中我使用 CC=D:\Applications\Soft\mingw32\bin\gcc;CXX=D:\Applications\Soft\mingw32\bin\g++）
 6. 将 [sciter-4.4.4.7-normal.dll](sciter-4.4.4.7-normal.dll) 或 [sciter-4.4.4.7-skia.dll](sciter-4.4.4.7-skia.dll) 更名为 sciter.dll，运行exe即可
 
 ## 截图
