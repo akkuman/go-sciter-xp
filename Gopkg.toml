@@ -1,0 +1,48 @@
+# Gopkg.toml example
+#
+# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
+# for detailed Gopkg.toml documentation.
+#
+# required = ["github.com/user/thing/cmd/thing"]
+# ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
+#
+# [[constraint]]
+#   name = "github.com/user/project"
+#   version = "1.0.0"
+#
+# [[constraint]]
+#   name = "github.com/user/project2"
+#   branch = "dev"
+#   source = "github.com/myfork/project2"
+#
+# [[override]]
+#   name = "github.com/x/y"
+#   version = "2.4.0"
+#
+# [prune]
+#   non-go = false
+#   go-tests = true
+#   unused-packages = true
+
+[[constraint]]
+  # 后续的版本合并了新版api（4.4.7.0+），xp可用的sciter-sdk版本最高到 4.4.4.7（https://github.com/c-smile/sciter-sdk/commit/c7d48627e8716bb803bebf2c74f54ab2dd0d7c51）
+  # 见 https://github.com/sciter-sdk/go-sciter/issues/297 与 https://github.com/sciter-sdk/go-sciter/commit/99cd4de65a26163ff93872ef7bba888b479081dc
+  # 所以需要降版本
+  revision = "a04e052a28133d8a79c82b53fc861d1e473c0499"
+  name = "github.com/sciter-sdk/go-sciter"
+
+[[override]]
+  branch = "master"
+  name = "github.com/lxn/win"
+
+[[override]]
+  # 新版会报错 shift count type int, must be unsigned integer，见 shift count type int, must be unsigned integer
+  # lxn/win 中引用了 window.UTF16PtrToString，所以不能引入太老的版本，见 https://github.com/golang/sys/blame/66a0560e4e097a54e439cdc529e28fcd0f9014e8/windows/syscall_windows.go
+  branch = "internal-branch.go1.16-vendor"
+  name = "golang.org/x/sys"
+
+[prune]
+  go-tests = true
+  # unused-packages = true
+
+
